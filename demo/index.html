@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMFont demo</title>
+    <script src="easeljs-NEXT.combined.js"></script>
+    <script src="preloadjs-NEXT.combined.js"></script>
+    <script src="../BitmapText.js"></script>
+</head>
+<body>
+    <canvas id="demoCanvas" width="500" height="500"></canvas>
+    <script>
+        var queue = new createjs.LoadQueue(false);
+        queue.on("complete", onLoadingComplete);
+        queue.loadManifest([
+            {id: 'fontImage', src: 'font.png'},
+            {id: 'fontXML', src: 'font.fnt', type: createjs.Types.XML}
+        ]);
+
+        function onLoadingComplete() {
+            var stage = new createjs.StageGL('demoCanvas');
+
+            var font = new createjs.BitmapFont(queue.getResult('fontImage'), queue.getResult('fontXML'));
+            var bitmapText = new createjs.BitmapText("Test!", font);
+            bitmapText.x = 100;
+            bitmapText.y = 100;
+            stage.addChild(bitmapText);
+            stage.update();
+
+        }
+    </script>
+</body>
+</html>
