@@ -239,7 +239,7 @@ this.createjs = this.createjs || {};
 		 * @type Object
 		 * @protected
 		 **/
-		this._oldProps = {text:0,spriteSheet:0,lineHeight:0,letterSpacing:0,spaceWidth:0};
+		this._oldProps = {text:0,spriteSheet:0,lineHeight:0,letterSpacing:0,spaceWidth:0,size:0};
 
 		/**
 		 * Used to track the object which this class attached listeners to, helps optimize listener attachment.
