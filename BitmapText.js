@@ -229,6 +229,8 @@ this.createjs = this.createjs || {};
 		 * @default 0
 		 **/
 		this.spaceWidth = this.bitmapFont ? this.bitmapFont.spaceWidth : 0;
+
+        this.size = this.bitmapFont ? this.bitmapFont.baseSize : 0;
 		
 		
 	// private properties:
@@ -413,6 +415,8 @@ this.createjs = this.createjs || {};
 	p._updateText = function() {
 		var x=0, y=0, o=this._oldProps, change=false, spaceW=this.spaceWidth, lineH=this.lineHeight, ss=this.spriteSheet;
 		var pool=BitmapText._spritePool, kids=this.children, childIndex=0, numKids=kids.length, sprite;
+
+		var letterScale = this.bitmapFont ? this.size / this.bitmapFont.baseSize : 1;
 		
 		for (var n in o) {
 			if (o[n] != this[n]) {
@@ -425,6 +429,9 @@ this.createjs = this.createjs || {};
 		var hasSpace = !!this._getFrame(" ", ss);
 		if (!hasSpace && !spaceW) { spaceW = this._getSpaceWidth(ss); }
 		if (!lineH) { lineH = this._getLineHeight(ss); }
+
+		spaceW *= letterScale;
+		lineH *= letterScale;
 		
 		for(var i=0, l=this.text.length; i<l; i++) {
 			var character = this.text.charAt(i);
@@ -452,11 +459,12 @@ this.createjs = this.createjs || {};
 			sprite.gotoAndStop(index);
 			sprite.x = x;
 			sprite.y = y;
+			sprite.scaleX = sprite.scaleY = letterScale;
 			childIndex++;
 
             var symbolInfo = this.bitmapFont && this.bitmapFont.getSymbol(character);
             var xadvance = symbolInfo ? symbolInfo.xadvance : (sprite.getBounds().width + this.letterSpacing);
-			x += xadvance;
+			x += xadvance * letterScale;
 		}
 		while (numKids > childIndex) {
 			 // faster than removeChild.

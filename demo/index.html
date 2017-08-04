@@ -21,9 +21,10 @@
             var stage = new createjs.StageGL('demoCanvas');
 
             var font = new createjs.BitmapFont(queue.getResult('fontImage'), queue.getResult('fontXML'));
-            var bitmapText = new createjs.BitmapText("Test!", font);
+            var bitmapText = new createjs.BitmapText("Test Test\nMore tests!", font);
             bitmapText.x = 100;
             bitmapText.y = 100;
+            bitmapText.size = 20;
             stage.addChild(bitmapText);
             stage.update();
 
