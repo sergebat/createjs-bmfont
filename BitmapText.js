@@ -416,6 +416,9 @@ this.createjs = this.createjs || {};
 		var x=0, y=0, o=this._oldProps, change=false, spaceW=this.spaceWidth, lineH=this.lineHeight, ss=this.spriteSheet;
 		var pool=BitmapText._spritePool, kids=this.children, childIndex=0, numKids=kids.length, sprite;
 
+		// Rebuilding text on size change might be too expensive. If someone choose to optimize it,
+        // please take care to keep scaleX/scaleY/size as separate properties. Do not simply change scaleX/scaleY
+        // on "this"! 
 		var letterScale = this.bitmapFont ? this.size / this.bitmapFont.baseSize : 1;
 		
 		for (var n in o) {
