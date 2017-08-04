@@ -418,7 +418,7 @@ this.createjs = this.createjs || {};
 
 		// Rebuilding text on size change might be too expensive. If someone choose to optimize it,
         // please take care to keep scaleX/scaleY/size as separate properties. Do not simply change scaleX/scaleY
-        // on "this"! 
+        // on "this"!
 		var letterScale = this.bitmapFont ? this.size / this.bitmapFont.baseSize : 1;
 		
 		for (var n in o) {
@@ -467,6 +467,7 @@ this.createjs = this.createjs || {};
 
             var symbolInfo = this.bitmapFont && this.bitmapFont.getSymbol(character);
             var xadvance = symbolInfo ? symbolInfo.xadvance : (sprite.getBounds().width + this.letterSpacing);
+            //var xadvance = (sprite.getBounds().width + this.letterSpacing);
 			x += xadvance * letterScale;
 		}
 		while (numKids > childIndex) {
